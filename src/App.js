@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, } from 'react';
+import {TravelContext} from './Context';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import RTP from "./pages/RTP"
+import MC from "./pages/MC"
+
+// const TravelContext = createContext();
 
 function App() {
+  const [mode,setMode] = useState("");
+  const [distance,setDistance] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <TravelContext.Provider value={{mode,setMode,distance,setDistance}}>
+      <Router>
+      <Routes>
+        <Route path="/" element={<RTP />} />
+        <Route path="/mode-of-choice" element={<MC />} />
+      </Routes>
+    </Router>
+    </TravelContext.Provider>
   );
 }
 
